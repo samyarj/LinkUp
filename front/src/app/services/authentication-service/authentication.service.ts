@@ -95,7 +95,7 @@ export class AuthenticationService {
   private setUser(user: AppUser): void {
     this.loggedUser.next(user);
     localStorage.setItem('user', JSON.stringify(user));
-    this.profileService.user = user;
+    this.profileService.setUser(user);
 
   }
 

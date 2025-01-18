@@ -24,6 +24,7 @@ import { NavigatePageComponent } from './pages/navigate-page/navigate-page.compo
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { CreateEventPageComponent } from './pages/create-event-page/create-event-page.component';
 import { Router } from '@angular/router';
+import { FirstLoginComponent } from './pages/profile-page/first-login/first-login.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { Router } from '@angular/router';
     MyProfileComponent,
     NavigatePageComponent,
     CreateEventPageComponent,
+    FirstLoginComponent,
   ],
   imports: [
     CommonModule,

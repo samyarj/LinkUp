@@ -7,7 +7,6 @@ export interface AppUser {
     avatar?: string,
     age?: number,
     pronouns?: Pronouns,
-    location?: [number, number];
 }
 
 export enum Pronouns {
