@@ -1,20 +1,19 @@
 /* From Uiverse.io by satyamchaudharydev */ 
 .header {
     padding: 2px;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 10rem;
     text-align: center;
     justify-content: center;
     background: white;
     color: white;
-    font-size: 40px;
     font-weight:bolder;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
     height: 100%;
     --s: 60px;
-    --c1: #180a22;
-    --c2: #645bff;
+    --c1: #AFE1AF;
+    --c2: #00A36C;
     --_g: radial-gradient(
       25% 25% at 25% 25%,
       var(--c1) 99%,
@@ -30,16 +29,16 @@
   }
 
 button {
-    --primary-color: #645bff;
+    --primary-color: #00A36C;
     --secondary-color: #fff;
-    --hover-color: #111;
+    --hover-color: #AFE1AF;
     --arrow-width: 10px;
     --arrow-stroke: 2px;
     box-sizing: border-box;
     border: 50px;
     border-radius: 30px;
     color: var(--secondary-color);
-    padding: 0.8em 1.8em;
+    padding: 0.8em 1.6em;
     background: var(--primary-color);
     display: flex;
     transition: 0.2s background;
@@ -47,8 +46,9 @@ button {
     gap: 0.6em;
     font-weight: bold;
     font-size: 30px;
-    margin:auto;
+    margin: auto;
     margin-top: 5rem;
+    padding-top:2rem;
   }
   
   button .arrow-wrapper {
@@ -64,6 +64,7 @@ button {
     height: var(--arrow-stroke);
     position: relative;
     transition: 0.2s;
+
   }
   
   button .arrow::before {
@@ -78,6 +79,7 @@ button {
     transition: 0.2s;
     padding: 3px;
     transform: rotate(-45deg);
+
   }
   
   button:hover {
@@ -91,4 +93,9 @@ button {
   button:hover .arrow:before {
     right: 0;
   }
-  
+  h1 {
+    padding-top: 10rem;
+    font-size: 150px;
+    text-shadow: 0 0 4px black
+
+  }
