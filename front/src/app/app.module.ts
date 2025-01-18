@@ -15,21 +15,29 @@ import { accessToken } from '../../assets/maps';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthButtonComponent } from './pages/login-page/auth-button/auth-button.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { NavigatePageComponent } from './pages/navigate-page/navigate-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { CreateEventPageComponent } from './pages/create-event-page/create-event-page.component';
+import { Router } from '@angular/router';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     LoginPageComponent,
     AuthButtonComponent,
+    NavigatePageComponent,
+    ProfilePageComponent,
+    CreateEventPageComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,
-    MatDividerModule, 
+    MatDividerModule,
     MatIconModule,
     NgxMapboxGLModule.withConfig({
       accessToken: accessToken,
@@ -41,10 +49,12 @@ import {MatDividerModule} from '@angular/material/divider';
       domain: 'dev-8cn4ee7fnjylxcsz.us.auth0.com',
       clientId: 'RLU5dSYynQfFsVWfKtnoBmgpjqug8mEw',
       authorizationParams: {
-        redirect_uri: window.location.origin
-      }}), 
-    provideAnimationsAsync(), provideHttpClient(withInterceptorsFromDi())
-    ],
-  bootstrap: [AppComponent]
+        redirect_uri: window.location.origin,
+      },
+    }),
+    provideAnimationsAsync(),
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

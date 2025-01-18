@@ -1,4 +1,4 @@
-@if(auth.isAuthenticated$ | async) {
+@if(auth.isAuthenticated$) {
 <button
   (click)="
     auth.logout({ logoutParams: { returnTo: document.location.origin } })
