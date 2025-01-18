@@ -1,1 +1,81 @@
-<p>my-profile works!</p>
+<div class="edit-profile-container">
+  <h1>Edit Profile</h1>
+  <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        formControlName="username"
+        type="text"
+        placeholder="Enter username"
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        formControlName="email"
+        type="email"
+        placeholder="Enter email"
+      />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        placeholder="Enter a description"
+      ></textarea>
+    </div>
+
+    <!-- Public Profile -->
+    <div class="form-group">
+      <label>
+        <input type="checkbox" formControlName="isProfilePublic" />
+        Is Profile Public?
+      </label>
+    </div>
+
+    <!-- Avatar -->
+    <div class="form-group">
+      <label for="avatar">Avatar URL</label>
+      <input
+        id="avatar"
+        formControlName="avatar"
+        type="url"
+        placeholder="Enter avatar URL"
+      />
+    </div>
+
+    <!-- Age -->
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input
+        id="age"
+        formControlName="age"
+        type="number"
+        placeholder="Enter age"
+      />
+    </div>
+
+    <!-- Pronouns -->
+    <div class="form-group">
+      <label for="pronouns">Pronouns</label>
+      <select id="pronouns" formControlName="pronouns">
+        <option value="" disabled>Select pronouns</option>
+        <option *ngFor="let pronoun of pronounsOptions" [value]="pronoun">
+          {{ pronoun }}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="editProfileForm.invalid">
+      Save Changes
+    </button>
+  </form>
+</div>

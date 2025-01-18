@@ -24,6 +24,7 @@ import { NavigatePageComponent } from './pages/navigate-page/navigate-page.compo
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { CreateEventPageComponent } from './pages/create-event-page/create-event-page.component';
 import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { Router } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,
