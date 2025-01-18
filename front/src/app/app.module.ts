@@ -10,16 +10,26 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { accessToken } from '../../assets/maps';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthButtonComponent } from './pages/login-page/auth-button/auth-button.component';
+import { TestComponent } from './pages/home-page/test/test.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
+    LoginPageComponent,
+    AuthButtonComponent,
+    TestComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,
+    MatDividerModule, 
+    MatIconModule,
     NgxMapboxGLModule.withConfig({
       accessToken: accessToken,
   }),
@@ -32,7 +42,7 @@ import { MatButtonModule } from '@angular/material/button';
       authorizationParams: {
         redirect_uri: window.location.origin
       }}), 
-    provideClientHydration(), provideAnimationsAsync(), provideHttpClient(withInterceptorsFromDi())
+    provideAnimationsAsync(), provideHttpClient(withInterceptorsFromDi())
     ],
   bootstrap: [AppComponent]
 })
