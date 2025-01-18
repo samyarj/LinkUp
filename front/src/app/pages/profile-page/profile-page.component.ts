@@ -13,6 +13,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   public user: AppUser = {} as AppUser;
   public friends: AppUser[] = [];
   public myNotes: Note[] = [];
+  public isFirstLogin: boolean = false;
 
   constructor(private profileService: ProfileService, private friendsService: FriendsService) {}
 
@@ -26,9 +27,11 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
   private setupdata(): void {
     this.profileService.user$.subscribe((user: AppUser | null) => {
+      this.isFirstLogin = this.profileService.isFirstLogin
       if(user) {
         this.user = user;
         this.getAllFriends();
+        //this.getAllNotes();
       }
     });
   }

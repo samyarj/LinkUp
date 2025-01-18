@@ -8,7 +8,7 @@ import { Note } from '../../interfaces/note.interface';
   providedIn: 'root'
 })
 export class PostService {
-  private baseUrl: string = environment.apiUrl + '/friends';
+  private baseUrl: string = environment.apiUrl + '/posts';
 
   constructor(private http: HttpClient) { }
 
@@ -27,5 +27,4 @@ export class PostService {
   public addCommentToEventById(eventId: string, comment: string): Observable<Note> {
     return this.http.post<Note>(`${this.baseUrl}/${eventId}/comment`, {comment});
   }
-
 }

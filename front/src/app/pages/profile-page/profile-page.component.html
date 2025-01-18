@@ -1,4 +1,8 @@
 <p>Mon profil</p>
-<app-my-profile></app-my-profile>
-<app-my-posts></app-my-posts>
-<app-friend-list></app-friend-list>
+@if(isFirstLogin) {
+    <app-first-login></app-first-login>
+} @else {
+  <app-my-profile></app-my-profile>
+  <app-my-posts></app-my-posts>
+  <app-friend-list></app-friend-list>
+}
