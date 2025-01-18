@@ -1,15 +1,14 @@
 @if(auth.isAuthenticated$ | async) {
-    <button
-      (click)="
-        auth.logout({ logoutParams: { returnTo: document.location.origin } })"
-    >
-      <p class="poppins-black-title inside-text">Log out</p>
-    </button>
+<button
+  (click)="
+    auth.logout({ logoutParams: { returnTo: document.location.origin } })
+  "
+>
+  <p class="poppins-black-title inside-text">Log out</p>
+</button>
 } @else {
-    <ng-template #loggedOut>
-        <button (click)="auth.loginWithRedirect()">
-          <p class="poppins-black-title inside-text">Log in</p>
-        </button>
-      </ng-template>
-      
+<button (click)="auth.loginWithRedirect()">
+  <p class="poppins-black-title inside-text">Log in</p>
+</button>
+
 }
