@@ -1,4 +1,16 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './pages/home-page/home-page.component';
 
-export const routes: Routes = [{ path: 'home', component: HomePageComponent }];
+export const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./pages/home-page/home-page.component').then(
+        (m) => m.HomePageComponent
+      ),
+  },
+  { path: 'navigate', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'setup-profile', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'create-event', redirectTo: '/home', pathMatch: 'full' },
+];
