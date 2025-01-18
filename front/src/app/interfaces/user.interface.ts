@@ -1,13 +1,13 @@
 export interface AppUser {
-    auth0Id: string,
+    id: string,
     username: string,
     email: string,
     description: string,
-    isProfilePublic: boolean,
+    isPublic: boolean,
     avatar?: string,
     age?: number,
     pronouns?: Pronouns,
-
+    location?: [number, number];
 }
 
 export enum Pronouns {

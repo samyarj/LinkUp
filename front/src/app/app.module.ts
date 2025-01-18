@@ -17,12 +17,20 @@ import { AuthButtonComponent } from './pages/login-page/auth-button/auth-button.
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { FriendListComponent } from './pages/profile-page/friend-list/friend-list.component';
+import { MyPostsComponent } from './pages/profile-page/my-posts/my-posts.component';
+import { MyProfileComponent } from './pages/profile-page/my-profile/my-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     LoginPageComponent,
     AuthButtonComponent,
+    ProfilePageComponent,
+    FriendListComponent,
+    MyPostsComponent,
+    MyProfileComponent,
   ],
   imports: [
     CommonModule,
