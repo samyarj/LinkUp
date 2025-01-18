@@ -14,7 +14,7 @@ export class HomePageComponent {
   }
 
   setupProfile() {
-    this.router.navigate(['/setup-profile']); // Update with your setup profile path
+    this.router.navigate(['/my-profile']); // Update with your setup profile path
   }
 
   createEvent() {
