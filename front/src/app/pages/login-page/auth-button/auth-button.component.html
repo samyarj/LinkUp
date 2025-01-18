@@ -1,14 +1,24 @@
-@if(auth.isAuthenticated$ | async) {
+<div class="header">
+  <h1>LinkUp</h1>
+</div>
+@if(auth.isAuthenticated$) {
 <button
   (click)="
     auth.logout({ logoutParams: { returnTo: document.location.origin } })
   "
 >
   <p class="poppins-black-title inside-text">Log out</p>
+  <div class="arrow-wrapper">
+    <div class="arrow"></div>
+  </div>
 </button>
 } @else {
 <button (click)="auth.loginWithRedirect()">
   <p class="poppins-black-title inside-text">Log in</p>
+  <div class="arrow-wrapper">
+    <div class="arrow"></div>
+  </div>
+  
 </button>
-
 }
+
