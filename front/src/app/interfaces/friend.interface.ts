@@ -1,5 +1,7 @@
+import { AppUser } from "./user.interface";
+
 export interface FriendRequest {
-    senderId: string,
+    sender: AppUser,
     receiverId: string,
     date: Date,
     status: Status

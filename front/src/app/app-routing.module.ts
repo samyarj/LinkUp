@@ -5,6 +5,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { NavigatePageComponent } from './pages/navigate-page/navigate-page.component';
 import { CreateEventPageComponent } from './pages/create-event-page/create-event-page.component';
+import { authGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
