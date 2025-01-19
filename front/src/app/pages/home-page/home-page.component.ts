@@ -17,7 +17,7 @@ export class HomePageComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private auth: AuthenticationService,
+    private auth: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -51,9 +51,8 @@ export class HomePageComponent implements OnInit {
 
   private getData() {
     this.auth.loggedUser.subscribe((user) => {
-      this.userId = user.id
-    }
-    );
+      this.userId = user.id;
+    });
     this.auth.isFisrtLogin.subscribe((isFirstLogin) => {
       this.isFirstLogin = isFirstLogin;
       if (this.isFirstLogin) {

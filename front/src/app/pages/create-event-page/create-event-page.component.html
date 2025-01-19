@@ -1,1 +1,59 @@
-<p>create-event-page works!</p>
+<form [formGroup]="noteEventForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="id">ID:</label>
+    <input id="id" formControlName="id" />
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <input id="description" formControlName="description" />
+  </div>
+  <div>
+    <label for="title">Title:</label>
+    <input id="title" formControlName="title" />
+  </div>
+  <div>
+    <label for="date">Date:</label>
+    <input id="date" type="date" formControlName="date" />
+  </div>
+  <div>
+    <label for="expirationDate">Expiration Date:</label>
+    <input id="expirationDate" type="date" formControlName="expirationDate" />
+  </div>
+  <div>
+    <label for="location">Location:</label>
+    <input id="location" formControlName="location" />
+  </div>
+  <div>
+    <label for="isPublic">Is Public:</label>
+    <input id="isPublic" type="checkbox" formControlName="isPublic" />
+  </div>
+  <div>
+    <label for="publicationDate">Publication Date:</label>
+    <input id="publicationDate" type="date" formControlName="publicationDate" />
+  </div>
+  <div>
+    <label for="userId">User ID:</label>
+    <input id="userId" formControlName="userId" />
+  </div>
+  <div>
+    <label for="messages">Messages:</label>
+    <input id="messages" formControlName="messages" />
+  </div>
+  <div>
+    <label for="isEvent">Is Event:</label>
+    <input
+      id="isEvent"
+      type="checkbox"
+      (change)="toggleEvent($event.target.checked)"
+    />
+  </div>
+  <div *ngIf="isEvent">
+    <label for="startingHour">Starting Hour:</label>
+    <input id="startingHour" type="number" formControlName="startingHour" />
+  </div>
+  <div *ngIf="isEvent">
+    <label for="endingHour">Ending Hour:</label>
+    <input id="endingHour" type="number" formControlName="endingHour" />
+  </div>
+  <button type="submit">Submit</button>
+</form>
