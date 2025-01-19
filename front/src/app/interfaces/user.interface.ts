@@ -1,3 +1,5 @@
+import { Event, Note } from "./note.interface";
+
 export interface AppUser {
     id: string,
     username: string,
@@ -7,6 +9,8 @@ export interface AppUser {
     avatar?: string,
     age?: number,
     pronouns?: Pronouns,
+    notes?: Note[];
+    events?: Event[];
 }
 
 export enum Pronouns {

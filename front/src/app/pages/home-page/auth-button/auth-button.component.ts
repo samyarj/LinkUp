@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, filter, Subject, takeUntil } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
@@ -10,7 +10,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class AuthButtonComponent implements OnInit, OnDestroy{
   private unsubscribe$ = new Subject<void>();
-  public isUserLogged: boolean = false;
+  @Input() isUserLogged: boolean = true;
   constructor(
     @Inject(DOCUMENT) public document: Document,
     public auth: AuthService,
@@ -35,10 +35,5 @@ export class AuthButtonComponent implements OnInit, OnDestroy{
     this.unsubscribe$.complete();
   }
 
-  public isLogged(): void {
-    this.auth.isAuthenticated$.subscribe((isLogged) => {
-      this.isUserLogged =  isLogged;
-    });
-  }
 
 }

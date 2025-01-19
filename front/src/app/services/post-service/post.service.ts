@@ -22,6 +22,14 @@ export class PostService {
     return this.http.get<Event[]>(this.baseUrl);
   }
 
+  public getFriendsPrivateNotes(userId: string): Observable<Note[]> {
+    return this.http.get<Note[]>(`${this.baseUrl}/private-notes/${userId}`);
+  }
+
+  public getFriendsPrivateEvents(userId: string): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.baseUrl}/private-events/${userId}`);
+  }
+
   public addCommentToNoteById(noteId: string, comment: Message): Observable<Note> {
     return this.http.post<Note>(`${this.baseUrl}/${noteId}/comment`, {comment});
   }

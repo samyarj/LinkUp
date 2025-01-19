@@ -13,8 +13,7 @@ import {
 } from '@angular/common/http';
 import { accessToken } from '../../assets/maps';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthButtonComponent } from './pages/login-page/auth-button/auth-button.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { AuthButtonComponent } from './pages/home-page/auth-button/auth-button.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { FriendListComponent } from './pages/profile-page/friend-list/friend-list.component';
@@ -23,17 +22,17 @@ import { MyProfileComponent } from './pages/profile-page/my-profile/my-profile.c
 import { NavigatePageComponent } from './pages/navigate-page/navigate-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { CreateEventPageComponent } from './pages/create-event-page/create-event-page.component';
-import { Router } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FirstLoginComponent } from './pages/profile-page/first-login/first-login.component';
 import { MapSidebarComponent } from './pages/navigate-page/map-sidebar/map-sidebar.component';
 import { PopupComponent } from './pages/navigate-page/popup/popup.component';
 import { PostInfoComponent } from './pages/post-info/post-info.component';
+import { FirstLoginDialogComponent } from './pages/home-page/first-login-dialog/first-login-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    LoginPageComponent,
     AuthButtonComponent,
     ProfilePageComponent,
     FriendListComponent,
@@ -45,6 +44,7 @@ import { PostInfoComponent } from './pages/post-info/post-info.component';
     MapSidebarComponent,
     PopupComponent,
     PostInfoComponent,
+    FirstLoginDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +53,7 @@ import { PostInfoComponent } from './pages/post-info/post-info.component';
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
+    MatDialogModule,
     NgxMapboxGLModule.withConfig({
       accessToken: accessToken,
     }),
@@ -60,10 +61,11 @@ import { PostInfoComponent } from './pages/post-info/post-info.component';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     provideAuth0({
-      domain: 'dev-8cn4ee7fnjylxcsz.us.auth0.com',
-      clientId: 'RLU5dSYynQfFsVWfKtnoBmgpjqug8mEw',
+      domain: 'dev-jgqogccadnvx5p03.us.auth0.com',
+      clientId: 'fKQy2WvuwvR2DQjRemBfXmPhEidnVkFK',
       authorizationParams: {
         redirect_uri: window.location.origin,
+        audience: "https://dev-jgqogccadnvx5p03.us.auth0.com/api/v2/",
       },
     }),
     provideAnimationsAsync(),

@@ -10,7 +10,6 @@ import { Note } from '../../interfaces/note.interface';
 })
 export class ProfileService {
   private baseUrl: string = environment.apiUrl + '/profile';
-  public isFirstLogin: boolean = false;
   public user$: BehaviorSubject<AppUser | null> = new BehaviorSubject<AppUser | null>(null);
 
   constructor(private http: HttpClient) { }
