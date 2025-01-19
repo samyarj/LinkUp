@@ -3,6 +3,7 @@ import { ProfileService } from '../../services/profile-service/profile.service';
 import { AppUser } from '../../interfaces/user.interface';
 import { Note } from '../../interfaces/note.interface';
 import { FriendsService } from '../../services/friends-service/friends.service';
+import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -15,7 +16,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   public myNotes: Note[] = [];
   public isFirstLogin: boolean = false;
 
-  constructor(private profileService: ProfileService, private friendsService: FriendsService) {}
+  constructor(private profileService: ProfileService, private friendsService: FriendsService, private auth: AuthenticationService) {}
 
   ngOnInit(): void {
     this.setupdata();
@@ -26,13 +27,15 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
 
   private setupdata(): void {
-      this.isFirstLogin = localStorage.getItem('isFirstLogin') === 'true';
       const jUser = localStorage.getItem('user');
       if (jUser) {
         this.user = JSON.parse(jUser);
         console.log(this.user);
         this.getUserById();
       }
+      this.auth.isFisrtLogin.subscribe((isFirstLogin) => {
+        this.isFirstLogin = isFirstLogin;
+      });
   }
 
   private getUserById(): void {
