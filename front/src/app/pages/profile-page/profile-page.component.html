@@ -1,42 +1,38 @@
 <!--return button-->
-<button mat-raised-button color="primary" (click)="return()">Return to home page</button>
+<button mat-raised-button color="primary" (click)="returnToHome()">
+  Return to home page
+</button>
 @if(isFirstLogin) {
-  <h2>Please complete your profile to continue</h2>
-  <app-my-profile [user]="user" (userUpdated)="handleUserUpdate($event)"></app-my-profile>
+<h2>Please complete your profile to continue</h2>
+<app-my-profile
+  [user]="user"
+  (userUpdated)="handleUserUpdate($event)"
+></app-my-profile>
 } @else {
-  <mat-expansion-panel [expanded]="true">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        My Profile
-      </mat-panel-title>
-      <mat-panel-description>
-        Edit your profile details.
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-my-profile [user]="user" (userUpdated)="handleUserUpdate($event)"></app-my-profile>
-  </mat-expansion-panel>
+<mat-expansion-panel [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title> My Profile </mat-panel-title>
+    <mat-panel-description> Edit your profile details. </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-my-profile
+    [user]="user"
+    (userUpdated)="handleUserUpdate($event)"
+  ></app-my-profile>
+</mat-expansion-panel>
 
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        My Posts
-      </mat-panel-title>
-      <mat-panel-description>
-        View and manage your posts.
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-my-posts></app-my-posts>
-  </mat-expansion-panel>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title> My Posts </mat-panel-title>
+    <mat-panel-description> View and manage your posts. </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-my-posts></app-my-posts>
+</mat-expansion-panel>
 
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        My Friends
-      </mat-panel-title>
-      <mat-panel-description>
-        Manage your friend list.
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-friend-list [userId]="user.id"></app-friend-list>
-  </mat-expansion-panel>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title> My Friends </mat-panel-title>
+    <mat-panel-description> Manage your friend list. </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-friend-list [userId]="user.id"></app-friend-list>
+</mat-expansion-panel>
 }
