@@ -15,12 +15,8 @@
     <!-- Email -->
     <div class="form-group">
       <label for="email">Email</label>
-      <input
-        id="email"
-        formControlName="email"
-        type="email"
-        placeholder="Enter email"
-      />
+      <input id="email" formControlName="email" type="email" placeholder="Enter email" [disabled]="true" />
+
     </div>
 
     <!-- Description -->
@@ -33,38 +29,32 @@
       ></textarea>
     </div>
 
-    <!-- Public Profile -->
+    <!-- Profile Visibility Toggle -->
     <div class="form-group">
-      <label> Profile visibility</label>
-      <div class="select-group">
-        <select formControlName="isProfilePublic">
-          <option value="" disabled>Select Visibility</option>
-          <option value="true">Public</option>
-          <option value="false">Private</option>
-        </select>
+      <label>Profile Visibility</label>
+      <label class="toggle-switch">
+        <input
+          type="checkbox"
+          formControlName="isProfilePublic"
+          [checked]="editProfileForm.get('isProfilePublic')?.value"
+        />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Avatar Selection -->
+    <div class="form-group">
+      <label>Select Avatar</label>
+      <div class="avatar-grid">
+        <div
+          *ngFor="let avatar of avatarOptions"
+          class="avatar-option"
+          [class.selected]="avatar === selectedAvatar"
+          (click)="selectAvatar(avatar)"
+        >
+          <img [src]="'assets/avatars/' + avatar" [alt]="avatar" />
+        </div>
       </div>
-    </div>
-
-    <!-- Avatar -->
-    <div class="form-group">
-      <label for="avatar">Avatar URL</label>
-      <input
-        id="avatar"
-        formControlName="avatar"
-        type="url"
-        placeholder="Enter avatar URL"
-      />
-    </div>
-
-    <!-- Age -->
-    <div class="form-group">
-      <label for="age">Age</label>
-      <input
-        id="age"
-        formControlName="age"
-        type="number"
-        placeholder="Enter age"
-      />
     </div>
 
     <!-- Pronouns -->

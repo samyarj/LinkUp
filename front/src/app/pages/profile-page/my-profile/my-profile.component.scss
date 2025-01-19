@@ -2,7 +2,7 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -10,38 +10,36 @@
 h1 {
   text-align: center;
   margin-bottom: 20px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  color: #333;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 label {
   font-weight: bold;
   margin-bottom: 5px;
+  display: block;
+  color: #555;
 }
 
 input,
 textarea,
 select {
+  width: 100%;
   padding: 10px;
-  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 16px;
 }
 
 button {
+  width: 100%;
   padding: 10px 20px;
   font-size: 16px;
   color: #fff;
-  background-color: #007bff;
+  background-color: #43cc2b;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -50,4 +48,74 @@ button {
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+/* Avatar Grid */
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.avatar-option {
+  border: 2px solid transparent;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar-option img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.avatar-option.selected {
+  transform: scale(1.2); 
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 25px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  left: 5px;
+  bottom: 2.5px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #3bc42c;
+}
+
+input:checked + .slider:before {
+  transform: translateX(25px);
 }

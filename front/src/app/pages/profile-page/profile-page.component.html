@@ -1,8 +1,40 @@
-<p>Mon profil</p>
 @if(isFirstLogin) {
-    <app-first-login></app-first-login>
+  <h2>Please complete your profile to continue</h2>
+  <app-my-profile [user]="user" (userUpdated)="handleUserUpdate($event)"></app-my-profile>
 } @else {
-  <app-my-profile></app-my-profile>
-  <app-my-posts></app-my-posts>
-  <app-friend-list></app-friend-list>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        My Profile
+      </mat-panel-title>
+      <mat-panel-description>
+        Edit your profile details.
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-my-profile [user]="user" (userUpdated)="handleUserUpdate($event)"></app-my-profile>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        My Posts
+      </mat-panel-title>
+      <mat-panel-description>
+        View and manage your posts.
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-my-posts></app-my-posts>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        My Friends
+      </mat-panel-title>
+      <mat-panel-description>
+        Manage your friend list.
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-friend-list></app-friend-list>
+  </mat-expansion-panel>
 }

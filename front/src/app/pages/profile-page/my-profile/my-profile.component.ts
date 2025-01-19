@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AppUser, Pronouns } from '../../../interfaces/user.interface';
+import { AppUser } from '../../../interfaces/user.interface';
 import { ProfileService } from '../../../services/profile-service/profile.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-my-profile',
@@ -9,94 +10,98 @@ import { ProfileService } from '../../../services/profile-service/profile.servic
   styleUrls: ['./my-profile.component.scss'],
 })
 export class MyProfileComponent implements OnInit {
+  @Input() user!: AppUser;
+  @Output() userUpdated = new EventEmitter<AppUser>();
   editProfileForm!: FormGroup;
   pronounsOptions: string[] = ['He/Him', 'She/Her', 'They/Them', 'Other'];
+  avatarOptions: string[] = [];
+  selectedAvatar: string = '';
 
-  // Mock current user data (replace with actual user data from your backend or service)
-  currentUser: AppUser = {
-    id: '12345',
-    username: 'JohnDoe',
-    email: 'johndoe@example.com',
-    description: 'Hello, I love coding!',
-    isPublic: true,
-    avatar: 'https://example.com/avatar.jpg',
-    age: 30,
-    pronouns: Pronouns.HE_HIM,
-  };
 
-  user!: AppUser;
   constructor(
     private fb: FormBuilder,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private route: ActivatedRoute 
   ) {}
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.loadAvatars();
+    this.route.params.subscribe((params) => {
+      const userId = params['id'];
+      if (userId && !this.user.id) {
+        this.loadUserData(userId);
+      } else {
+        this.initializeForm();
+      }
+    });
   }
 
+  selectAvatar(avatar: string): void {
+    this.selectedAvatar = avatar;
+    this.user.avatar = avatar;
+    this.emitUserUpdate();
+  }
+
+
+  private loadUserData(userId: string): void {
+    this.profileService.getIfUserExist(userId).subscribe({
+      next: (user) => {
+        this.user = user;
+        this.initializeForm();
+      },
+      error: (error) => {
+        console.error('Error loading user data:', error);
+      },
+    });
+  }
   // Initialize the form with current user data
   private initializeForm(): void {
     this.editProfileForm = this.fb.group({
       username: [
-        this.currentUser.username,
+        this.user.username,
         [Validators.required, Validators.minLength(3)],
       ],
-      email: [{ value: this.currentUser.email, disabled: true }], // Disable email field
-      description: [this.currentUser.description],
-      isProfilePublic: [this.currentUser.isPublic],
-      avatar: [this.currentUser.avatar],
-      age: [this.currentUser.age, [Validators.min(0)]],
-      pronouns: [this.currentUser.pronouns],
+      email: [{ value: this.user.email, disabled: true }],
+      description: [this.user.description],
+      isProfilePublic: [this.user.isPublic],
+      avatar: [this.user.avatar],
+      age: [this.user.age, [Validators.min(0)]],
+      pronouns: [this.user.pronouns],
     });
   }
 
   // Handle form submission
   onSubmit(): void {
     if (this.editProfileForm.valid) {
-      const updatedUser: AppUser = {
-        ...this.currentUser,
+      this.user = {
+        ...this.user,
         ...this.editProfileForm.value,
+        avatar: this.selectedAvatar,
       };
-
+      this.emitUserUpdate();
       this.saveUser();
     }
   }
 
   saveUser() {
-    this.profileService.getIfUserExist(this.user.id).subscribe({
-      next: (existingUser) => {
-        if (existingUser) {
-          this.profileService.updateUser(this.user).subscribe({
-            next: (updatedUser) => {
-              console.log('User updated:', updatedUser);
-            },
-            error: (error) => {
-              console.error('Error updating user:', error);
-            },
-          });
-        } else {
-          this.profileService.createUser(this.user).subscribe({
-            next: (createdUser) => {
-              console.log('User created:', createdUser);
-            },
-            error: (error) => {
-              console.error('Error creating user:', error);
-            },
-          });
-        }
+    this.profileService.createUser(this.user).subscribe({
+      next: (createdUser) => {
+        console.log('User created:', createdUser);
+
       },
       error: (error) => {
-        console.error('Error checking if user exists:', error);
-        // Assuming that if there's an error, the user does not exist
-        this.profileService.createUser(this.user).subscribe({
-          next: (createdUser) => {
-            console.log('User created:', createdUser);
-          },
-          error: (error) => {
-            console.error('Error creating user:', error);
-          },
-        });
+        console.error('Error creating user:', error);
       },
     });
   }
+      
+
+  private loadAvatars(): void {
+    this.avatarOptions = Array.from({ length: 6 }, (_, i) => `avatar${i + 1}.png`);
+  }
+  private emitUserUpdate(): void {
+    this.userUpdated.emit(this.user);
+  }
 }
+
+

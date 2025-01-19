@@ -23,13 +23,12 @@ import { NavigatePageComponent } from './pages/navigate-page/navigate-page.compo
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { CreateEventPageComponent } from './pages/create-event-page/create-event-page.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FirstLoginComponent } from './pages/profile-page/first-login/first-login.component';
 import { MapSidebarComponent } from './pages/navigate-page/map-sidebar/map-sidebar.component';
 import { PopupComponent } from './pages/navigate-page/popup/popup.component';
 import { PostInfoComponent } from './pages/post-info/post-info.component';
 import { FirstLoginDialogComponent } from './pages/home-page/first-login-dialog/first-login-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +40,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MyProfileComponent,
     NavigatePageComponent,
     CreateEventPageComponent,
-    FirstLoginComponent,
     MapSidebarComponent,
     PopupComponent,
     PostInfoComponent,
@@ -56,6 +54,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDividerModule,
     MatIconModule,
     MatDialogModule,
+    MatExpansionModule,
     NgxMapboxGLModule.withConfig({
       accessToken: accessToken,
     }),
