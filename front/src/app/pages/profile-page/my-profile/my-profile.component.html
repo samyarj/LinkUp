@@ -25,7 +25,7 @@
 
     <!-- Description -->
     <div class="form-group">
-      <label for="description">Description</label>
+      <label for="description">Bio</label>
       <textarea
         id="description"
         formControlName="description"
@@ -35,10 +35,14 @@
 
     <!-- Public Profile -->
     <div class="form-group">
-      <label>
-        <input type="checkbox" formControlName="isProfilePublic" />
-        Is Profile Public?
-      </label>
+      <label> Profile visibility</label>
+      <div class="select-group">
+        <select formControlName="isProfilePublic">
+          <option value="" disabled>Select Visibility</option>
+          <option value="true">Public</option>
+          <option value="false">Private</option>
+        </select>
+      </div>
     </div>
 
     <!-- Avatar -->
