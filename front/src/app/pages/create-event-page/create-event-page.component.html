@@ -1,59 +1,64 @@
-<form [formGroup]="noteEventForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="id">ID:</label>
-    <input id="id" formControlName="id" />
-  </div>
-  <div>
-    <label for="description">Description:</label>
-    <input id="description" formControlName="description" />
-  </div>
-  <div>
-    <label for="title">Title:</label>
-    <input id="title" formControlName="title" />
-  </div>
-  <div>
-    <label for="date">Date:</label>
-    <input id="date" type="date" formControlName="date" />
-  </div>
-  <div>
-    <label for="expirationDate">Expiration Date:</label>
-    <input id="expirationDate" type="date" formControlName="expirationDate" />
-  </div>
-  <div>
-    <label for="location">Location:</label>
-    <input id="location" formControlName="location" />
-  </div>
-  <div>
-    <label for="isPublic">Is Public:</label>
-    <input id="isPublic" type="checkbox" formControlName="isPublic" />
-  </div>
-  <div>
-    <label for="publicationDate">Publication Date:</label>
-    <input id="publicationDate" type="date" formControlName="publicationDate" />
-  </div>
-  <div>
-    <label for="userId">User ID:</label>
-    <input id="userId" formControlName="userId" />
-  </div>
-  <div>
-    <label for="messages">Messages:</label>
-    <input id="messages" formControlName="messages" />
-  </div>
-  <div>
-    <label for="isEvent">Is Event:</label>
-    <input
-      id="isEvent"
-      type="checkbox"
-      (change)="toggleEvent($event.target.checked)"
-    />
-  </div>
-  <div *ngIf="isEvent">
-    <label for="startingHour">Starting Hour:</label>
-    <input id="startingHour" type="number" formControlName="startingHour" />
-  </div>
-  <div *ngIf="isEvent">
-    <label for="endingHour">Ending Hour:</label>
-    <input id="endingHour" type="number" formControlName="endingHour" />
-  </div>
-  <button type="submit">Submit</button>
-</form>
+<div class="create-event-page-container">
+  <h1 class="page-title">{{ isEvent ? 'Create Event' : 'Create Note' }}</h1>
+
+  <mat-button-toggle-group
+    name="eventToggle"
+    [value]="isEvent"
+    (change)="toggleEvent($event)"
+    class="toggle-group"
+  >
+    <mat-button-toggle [value]="false">Note</mat-button-toggle>
+    <mat-button-toggle [value]="true">Event</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <form [formGroup]="noteEventForm" (ngSubmit)="onSubmit()" class="form-container">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" placeholder="Enter title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Enter description"></textarea>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Publication Date</mat-label>
+        <input matInput formControlName="publicationDate" [matDatepicker]="pubDatePicker" />
+        <mat-datepicker-toggle matSuffix [for]="pubDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #pubDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Expiration Date</mat-label>
+        <input matInput formControlName="expirationDate" [matDatepicker]="expDatePicker" />
+        <mat-datepicker-toggle matSuffix [for]="expDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #expDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <app-address-autocomplete (addressSelected)="onAddressSelected($event)"></app-address-autocomplete>
+
+    <div *ngIf="isEvent" class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Starting Hour</mat-label>
+        <input matInput formControlName="startingHour" type="time" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Ending Hour</mat-label>
+        <input matInput formControlName="endingHour" type="time" />
+      </mat-form-field>
+    </div>
+
+    <div class="public-toggle">
+      <mat-slide-toggle formControlName="isPublic">Public</mat-slide-toggle>
+    </div>
+
+    <div class="submit-container">
+      <button mat-raised-button color="primary" [disabled]="!noteEventForm.valid">
+        {{ isEvent ? 'Create Event' : 'Create Note' }}
+      </button>
+    </div>
+  </form>
+</div>

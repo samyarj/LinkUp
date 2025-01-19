@@ -1,0 +1,54 @@
+.create-event-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1c8930;
+  }
+
+  .toggle-group {
+    margin-bottom: 20px;
+  }
+
+  .form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+
+      .half-width {
+        flex: 1;
+      }
+    }
+
+    .full-width {
+      width: 100%;
+    }
+  }
+
+  .public-toggle {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .submit-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+}

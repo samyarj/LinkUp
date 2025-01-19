@@ -29,6 +29,13 @@ import { PostInfoComponent } from './pages/post-info/post-info.component';
 import { FirstLoginDialogComponent } from './pages/home-page/first-login-dialog/first-login-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { AppAddressAutocompleteComponent } from './pages/create-event-page/address-autocomplete/address-autocomplete.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +51,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     PopupComponent,
     PostInfoComponent,
     FirstLoginDialogComponent,
+    AppAddressAutocompleteComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +63,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatIconModule,
     MatDialogModule,
     MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatSlideToggleModule,
+    MatNativeDateModule,
+    MatButtonToggleModule,
     NgxMapboxGLModule.withConfig({
       accessToken: accessToken,
     }),

@@ -31,33 +31,34 @@ export class ProfileService {
   }
 
   public getUserNotes(userId: string): Observable<Note[]> {
-    return this.http.get<Note[]>(`${this.baseUrl}/posts/${userId}`);
+    return this.http.get<Note[]>(`${this.baseUrl}/${userId}/notes`);
   }
 
   public getUserEvents(userId: string): Observable<Note[]> {
-    return this.http.get<Note[]>(`${this.baseUrl}/events/${userId}`);
+    return this.http.get<Note[]>(`${this.baseUrl}/${userId}/events`);
   }
 
   public deleteNoteById(noteId: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${noteId}`);
-  }
-  public deleteEventById(eventId: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${eventId}`);
-  }
-  public createNoteByUser(note: Note): Observable<Note> {
-    return this.http.post<Note>(this.baseUrl, note);
+    return this.http.delete<void>(`${this.baseUrl}/notes/${noteId}`);
   }
 
-  public createEventByUser(event: Note): Observable<Note> {
-    return this.http.post<Note>(this.baseUrl, event);
+  public deleteEventById(eventId: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/events/${eventId}`);
+  }
+
+  public createNoteByUser(note: Note, userId: string): Observable<Note> {
+    return this.http.post<Note>(`${this.baseUrl}/${userId}/notes`, note);
+  }
+
+  public createEventByUser(event: Note, userId: string): Observable<Note> {
+    return this.http.post<Note>(`${this.baseUrl}/${userId}/events`, event);
   }
 
   public updateNoteByUser(note: Note): Observable<Note> {
-    return this.http.put<Note>(`${this.baseUrl}/${note.id}`, note);
+    return this.http.put<Note>(`${this.baseUrl}/notes/${note.id}`, note);
   }
 
   public updateEventByUser(event: Note): Observable<Note> {
-    return this.http.put<Note>(`${this.baseUrl}/${event.id}`, event);
+    return this.http.put<Note>(`${this.baseUrl}/events/${event.id}`, event);
   }
-
 }
