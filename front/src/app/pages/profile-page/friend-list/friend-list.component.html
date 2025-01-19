@@ -1,1 +1,51 @@
-<p>friend-list works!</p>
+<div class="friend-list-container">
+    <mat-accordion>
+      <!-- Friends Section -->
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Friends</mat-panel-title>
+          <mat-panel-description>{{ friends.length }} friends</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="friends.length === 0" class="empty-message">
+          No friends found.
+        </div>
+        <div *ngFor="let friend of friends" class="friend-card">
+          <img [src]="'assets/avatars/' + friend.avatar" [alt]="friend.username" />
+          <div class="friend-details">
+            <h3>{{ friend.username }}</h3>
+            <p>{{ friend.description }}</p>
+            <button mat-raised-button color="warn" (click)="removeFriend(friend.id)">
+              Remove
+            </button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+  
+      <!-- Friend Requests Section -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Friend Requests</mat-panel-title>
+          <mat-panel-description>{{ friendRequests.length }} requests</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="friendRequests.length === 0" class="empty-message">
+          No pending friend requests.
+        </div>
+        <div *ngFor="let request of friendRequests" class="friend-card">
+          <img [src]="'assets/avatars/' + request.sender.avatar" [alt]="request.sender.username" />
+          <div class="friend-details">
+            <h3>{{ request.sender.username }}</h3>
+            <p>{{ request.sender.description }}</p>
+            <div class="actions">
+              <button mat-raised-button color="primary" class="accept" (click)="handleFriendRequest(request, true)">
+                Accept
+              </button>
+              <button mat-raised-button color="warn" (click)="handleFriendRequest(request, false)">
+                Decline
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  

@@ -1,1 +1,64 @@
-<p>create-event-page works!</p>
+<div class="create-event-page-container">
+  <h1 class="page-title">{{ isEvent ? 'Create Event' : 'Create Note' }}</h1>
+
+  <mat-button-toggle-group
+    name="eventToggle"
+    [value]="isEvent"
+    (change)="toggleEvent($event)"
+    class="toggle-group"
+  >
+    <mat-button-toggle [value]="false">Note</mat-button-toggle>
+    <mat-button-toggle [value]="true">Event</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <form [formGroup]="noteEventForm" (ngSubmit)="onSubmit()" class="form-container">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" placeholder="Enter title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Enter description"></textarea>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Publication Date</mat-label>
+        <input matInput formControlName="publicationDate" [matDatepicker]="pubDatePicker" />
+        <mat-datepicker-toggle matSuffix [for]="pubDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #pubDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Expiration Date</mat-label>
+        <input matInput formControlName="expirationDate" [matDatepicker]="expDatePicker" />
+        <mat-datepicker-toggle matSuffix [for]="expDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #expDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <app-address-autocomplete (addressSelected)="onAddressSelected($event)"></app-address-autocomplete>
+
+    <div *ngIf="isEvent" class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Starting Hour</mat-label>
+        <input matInput formControlName="startingHour" type="time" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Ending Hour</mat-label>
+        <input matInput formControlName="endingHour" type="time" />
+      </mat-form-field>
+    </div>
+
+    <div class="public-toggle">
+      <mat-slide-toggle formControlName="isPublic">Public</mat-slide-toggle>
+    </div>
+
+    <div class="submit-container">
+      <button mat-raised-button color="primary" [disabled]="!noteEventForm.valid">
+        {{ isEvent ? 'Create Event' : 'Create Note' }}
+      </button>
+    </div>
+  </form>
+</div>

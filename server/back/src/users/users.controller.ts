@@ -59,7 +59,7 @@ export class UsersController {
   }
 
   @Post(':id/events')
-  createEventByUser(@Param('id') userId: string, @Body() event: Partial<Event>): Promise<EventDto> {
+  createEventByUser(@Param('id') userId: string, @Body() event: Partial<EventDto>): Promise<EventDto> {
     return this.usersService.createEventByUser(event, userId);
   }
 
