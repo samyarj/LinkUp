@@ -12,6 +12,7 @@ import { AuthenticationService } from '../../services/authentication-service/aut
 export class HomePageComponent implements OnInit {
   public isFirstLogin: boolean = false;
   public isLogged: boolean = false;
+  public userId: string | null = null;
 
   constructor(
     private router: Router,
@@ -24,23 +25,42 @@ export class HomePageComponent implements OnInit {
   }
 
   createEvent() {
-    this.router.navigate(['/new-event']);
+    if (this.userId) {
+      this.router.navigate([`/new-event/${this.userId}`]);
+    } else {
+      alert('You need to be logged in to create an event');
+    }
   }
 
   editProfile() {
-    this.router.navigate(['/my-profile']);
+    console.log('User ID:', this.userId);
+    if (this.userId) {
+      this.router.navigate([`/my-profile/${this.userId}`]);
+    } else {
+      alert('You need to be logged in to edit your profile');
+    }
   }
 
   navigate() {
-    this.router.navigate(['/navigate']);
+    if (this.userId) {
+      this.router.navigate([`/navigate/${this.userId}`]);
+    } else {
+      alert('You need to be logged in to navigate');
+    }
   }
 
   private getData() {
-    this.isFirstLogin = localStorage.getItem('isFirstLogin') === 'true';
-    if (this.isFirstLogin) {
-      this.openFirstLoginDialog();
+    this.auth.loggedUser.subscribe((user) => {
+      this.userId = user.id
     }
-    this.subcribeToAuth();
+    );
+    this.auth.isFisrtLogin.subscribe((isFirstLogin) => {
+      this.isFirstLogin = isFirstLogin;
+      if (this.isFirstLogin) {
+        this.openFirstLoginDialog();
+      }
+      this.subcribeToAuth();
+    });
   }
 
   private openFirstLoginDialog(): void {
@@ -50,17 +70,11 @@ export class HomePageComponent implements OnInit {
   }
 
   private subcribeToAuth(): void {
-    this.auth.isAuthenticated$.subscribe((isAuth) => {
-      this.isLogged = isAuth;
-      console.log('isLogged', this.isLogged);
-    });
-  
-    this.auth.isAuthenticated$.subscribe((isAuth) => {
-      if (isAuth) {
-        this.auth.auth0Service.user$.subscribe((user) => {
-          console.log('Authenticated user:', user);
-        });
-      }
+    this.userId = this.auth.getStoredUser()?.id || null;
+    this.auth.loggedUser$.subscribe((user) => {
+      console.log('User:', user);
+      this.isLogged = !!user.id;
+      this.userId = user.id;
     });
   }
 }

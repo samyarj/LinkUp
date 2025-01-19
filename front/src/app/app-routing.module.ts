@@ -8,11 +8,11 @@ import { authGuard } from './auth/auth.guard';
 import { PostInfoComponent } from './pages/post-info/post-info.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomePageComponent, canActivate: [authGuard] },
-  { path: 'navigate', component: NavigatePageComponent, canActivate: [authGuard] },
+  { path: 'home', component: HomePageComponent },
+  { path: 'navigate/:id', component: NavigatePageComponent, canActivate: [authGuard] },
   { path: 'info/:id', component: PostInfoComponent, canActivate: [authGuard] },
-  { path: 'my-profile', component: ProfilePageComponent, canActivate: [authGuard]},
-  { path: 'new-event', component: CreateEventPageComponent },
+  { path: 'my-profile/:id', component: ProfilePageComponent, canActivate: [authGuard]},
+  { path: 'my-profile/:id/new-event', component: CreateEventPageComponent, canActivate: [authGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full', },
   { path: '**', redirectTo: 'home' },
 ];

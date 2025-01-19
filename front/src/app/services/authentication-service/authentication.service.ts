@@ -9,9 +9,9 @@ import { ProfileService } from '../profile-service/profile.service';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private loggedUser: BehaviorSubject<AppUser> = new BehaviorSubject<AppUser>({} as AppUser);
+  public loggedUser: BehaviorSubject<AppUser> = new BehaviorSubject<AppUser>({} as AppUser);
   public isAuthentificated: boolean = false;
-
+  public isFisrtLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   get isAuthenticated$() {
     return this.auth0Service.isAuthenticated$;
   }
@@ -22,30 +22,20 @@ export class AuthenticationService {
 
   
   constructor(public auth0Service: AuthService, private profileService: ProfileService, private router: Router) {
-    console.log('auth service');
 
-    this.auth0Service.idTokenClaims$.subscribe((claims) => {
-      console.log('ID Token Claims:', claims);
-      
-    });
-  
-    this.auth0Service.getAccessTokenSilently().subscribe((accessToken) => {
-      console.log('Access Token:', accessToken);
-      localStorage.setItem('accessToken', accessToken);
-    });
     this.auth0Service.user$.subscribe(user => {
       console.log('user', user);
       if (user && user.sub) {
         this.profileService.getIfUserExist(user.sub).subscribe({
-          next: (user: AppUser) => {
-            this.setUser(user);
+          next: (bdUser: any) => {
+            if(!bdUser){
+              this.setUpUser(user);
+            }
+            console.log('triche', bdUser);
+            this.setUser(bdUser);
           },
           error: (error: any) => {
-            if (user?.email && user?.sub) {
-              this.setUpUser(user);
-              localStorage.setItem('isFirstLogin', 'true');
-              this.router.navigate(['/profile']);
-            }   
+            console.error('Error getting user:', error);
           },
         });
       }
@@ -85,6 +75,7 @@ export class AuthenticationService {
     console.log('userInfo', userInfo);
     this.profileService.createUser(userInfo).subscribe({
       next: (user: AppUser) => {
+        this.isFisrtLogin.next(true);
         this.setUser(user);
       },
       error: (error: any) => console.error("Error creating user:", error),
@@ -92,6 +83,7 @@ export class AuthenticationService {
   }
 
   private setUser(user: AppUser): void {
+    console.log('setUser', user);
     if (!user) {
       return;
     }
