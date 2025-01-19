@@ -1,3 +1,5 @@
+<!--return button-->
+<button mat-raised-button color="primary" (click)="return()">Return to home page</button>
 @if(isFirstLogin) {
   <h2>Please complete your profile to continue</h2>
   <app-my-profile [user]="user" (userUpdated)="handleUserUpdate($event)"></app-my-profile>
@@ -35,6 +37,6 @@
         Manage your friend list.
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <app-friend-list></app-friend-list>
+    <app-friend-list [userId]="user.id"></app-friend-list>
   </mat-expansion-panel>
 }

@@ -30,6 +30,10 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     this.user = updatedUser;
     this.updateProfile();
   }
+
+  public return(): void {
+    this.auth.isFisrtLogin.next(false);
+  }
   
   public updateProfile(): void {
     this.profileService.updateUser(this.user).subscribe((user: AppUser) => {
