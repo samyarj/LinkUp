@@ -28,6 +28,7 @@ import { MapSidebarComponent } from './pages/navigate-page/map-sidebar/map-sideb
 import { PopupComponent } from './pages/navigate-page/popup/popup.component';
 import { PostInfoComponent } from './pages/post-info/post-info.component';
 import { FirstLoginDialogComponent } from './pages/home-page/first-login-dialog/first-login-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { FirstLoginDialogComponent } from './pages/home-page/first-login-dialog/
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,
