@@ -7,6 +7,7 @@ import { AppUser } from '../../interfaces/user.interface';
 import * as mapboxgl from 'mapbox-gl';
 import { parseNotesToGeoJson } from '../../utils/geoJson';
 import { PopupComponent } from './popup/popup.component';
+import { Router } from '@angular/router';
 interface PinClass {
   isEvent?: boolean;
   isFriend: boolean;
@@ -110,7 +111,7 @@ export class NavigatePageComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   constructor(
-    private postService: PostService, private friendService: FriendsService, private componentFactoryResolver: ComponentFactoryResolver, private injector: Injector, private appRef: ApplicationRef
+    private postService: PostService, private friendService: FriendsService, private componentFactoryResolver: ComponentFactoryResolver, private injector: Injector, private appRef: ApplicationRef, private router: Router
 
   ) {}
 
@@ -124,6 +125,9 @@ export class NavigatePageComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
+  onItemSelected(item: Note | Event): void {
+    this.router.navigate(['/post', item.id]);
+  }
 
   onMapLoad(map: mapboxgl.Map): void {
     this.map = map; 

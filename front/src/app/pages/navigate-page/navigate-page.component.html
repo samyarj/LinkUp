@@ -1,4 +1,12 @@
 <div id="container">
+  <div class="map-sidebar">
+    <app-map-sidebar
+      [notes]="notes"
+      [events]="events"
+      (itemSelected)="onItemSelected($event)"
+    ></app-map-sidebar>
+  </div>
+  <div class="map-container">
     <mgl-map
       class="map"
       [style]="'mapbox://styles/mapbox/streets-v11'"
@@ -42,4 +50,5 @@
       </mgl-layer>
     </mgl-map>
   </div>
+</div>
   
