@@ -26,20 +26,33 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
 
   private setupdata(): void {
-    this.profileService.user$.subscribe((user: AppUser | null) => {
-      this.isFirstLogin = this.profileService.isFirstLogin
-      if(user) {
-        this.user = user;
-        this.getAllFriends();
-        //this.getAllNotes();
+      this.isFirstLogin = localStorage.getItem('isFirstLogin') === 'true';
+      const jUser = localStorage.getItem('user');
+      if (jUser) {
+        this.user = JSON.parse(jUser);
+        console.log(this.user);
+        this.getUserById();
       }
-    });
   }
 
+  private getUserById(): void {
+    this.profileService.getIfUserExist(this.user.id).subscribe((user: AppUser) => {
+      this.user = user;
+      console.log(this.user);
+      this.getAllFriends();
+      this.getAllNotes();
+    });
+  }
 
   private getAllFriends(): void {
     this.friendsService.getAllFriends(this.user.id).subscribe((friends: AppUser[]) => {
       this.friends = friends;
+    });
+  }
+
+  private getAllNotes(): void {
+    this.profileService.getUserNotes(this.user.id).subscribe((notes: Note[]) => {
+      this.myNotes = notes;
     });
   }
 

@@ -6,8 +6,11 @@
     "@angular/core": "^19.1.1",
     "@angular/material": "^19.1.0",
     "@auth0/auth0-angular": "^2.2.3",
+    "@nestjs/typeorm": "^11.0.0",
     "mapbox-gl": "^2.15.0",
     "ngx-bootstrap": "^19.0.2",
-    "ngx-mapbox-gl": "^11.0.1"
+    "ngx-mapbox-gl": "^11.0.1",
+    "pg": "^8.13.1",
+    "typeorm": "^0.3.20"
   }
 }

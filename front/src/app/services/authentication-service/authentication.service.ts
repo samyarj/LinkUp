@@ -9,9 +9,9 @@ import { ProfileService } from '../profile-service/profile.service';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private loggedUser: BehaviorSubject<AppUser> = new BehaviorSubject<AppUser>({} as AppUser);
+  public loggedUser: BehaviorSubject<AppUser> = new BehaviorSubject<AppUser>({} as AppUser);
   public isAuthentificated: boolean = false;
-
+  public isFisrtLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   get isAuthenticated$() {
     return this.auth0Service.isAuthenticated$;
   }
@@ -21,19 +21,21 @@ export class AuthenticationService {
   }
 
   
-  constructor(private auth0Service: AuthService, private profileService: ProfileService, private router: Router) {
+  constructor(public auth0Service: AuthService, private profileService: ProfileService, private router: Router) {
+
     this.auth0Service.user$.subscribe(user => {
+      console.log('user', user);
       if (user && user.sub) {
         this.profileService.getIfUserExist(user.sub).subscribe({
-          next: (user: AppUser) => {
-            this.setUser(user);
+          next: (bdUser: any) => {
+            if(!bdUser){
+              this.setUpUser(user);
+            }
+            console.log('triche', bdUser);
+            this.setUser(bdUser);
           },
           error: (error: any) => {
-            if (user?.email && user?.sub) {
-              this.setUpUser(user);
-              this.profileService.isFirstLogin = true;
-              this.router.navigate(['/profile']);
-            }   
+            console.error('Error getting user:', error);
           },
         });
       }
@@ -43,7 +45,6 @@ export class AuthenticationService {
   public logout() {
     this.auth0Service.logout();
     window.location.href = window.location.origin;
-    localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.loggedUser.next({} as AppUser);
   }
@@ -62,19 +63,6 @@ export class AuthenticationService {
     return this.getStoredUser();
   }
 
-  public updateLoggedUserInfo(user: AppUser): void {
-    this.loggedUser.next(user);
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-
-  public handleUnAuthorizedUser(): void {
-    if (!this.isAuthenticated$) {
-      this.router.navigate(['/register']);
-    }
-  }
-
-
-
   private setUpUser(user: any) {
     const tempUsername = user.email.split('@')[0];
     const userInfo: AppUser = {
@@ -84,8 +72,10 @@ export class AuthenticationService {
       isPublic: true,
       username: user.nickname || tempUsername,
     };
+    console.log('userInfo', userInfo);
     this.profileService.createUser(userInfo).subscribe({
       next: (user: AppUser) => {
+        this.isFisrtLogin.next(true);
         this.setUser(user);
       },
       error: (error: any) => console.error("Error creating user:", error),
@@ -93,6 +83,10 @@ export class AuthenticationService {
   }
 
   private setUser(user: AppUser): void {
+    console.log('setUser', user);
+    if (!user) {
+      return;
+    }
     this.loggedUser.next(user);
     localStorage.setItem('user', JSON.stringify(user));
     this.profileService.setUser(user);

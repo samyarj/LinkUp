@@ -1,0 +1,58 @@
+.popup-container {
+    max-width: 300px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+  }
+  
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .popup-header h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+  }
+  
+  .event-badge, .note-badge {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: white;
+    background-color: #007bff;
+  }
+  
+  .note-badge {
+    background-color: #28a745;
+  }
+  
+  .popup-description {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .popup-details {
+    font-size: 12px;
+    color: #666;
+  
+    div {
+      margin-bottom: 5px;
+    }
+  
+    strong {
+      color: #333;
+    }
+  }
+
+  .green {
+    background-color: #28a745 !important;
+  }
+  

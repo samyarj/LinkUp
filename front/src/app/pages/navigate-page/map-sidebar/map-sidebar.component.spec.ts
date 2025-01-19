@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginPageComponent } from './login-page.component';
+import { MapSidebarComponent } from './map-sidebar.component';
 
-describe('LoginPageComponent', () => {
-  let component: LoginPageComponent;
-  let fixture: ComponentFixture<LoginPageComponent>;
+describe('MapSidebarComponent', () => {
+  let component: MapSidebarComponent;
+  let fixture: ComponentFixture<MapSidebarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginPageComponent]
+      declarations: [MapSidebarComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LoginPageComponent);
+    fixture = TestBed.createComponent(MapSidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
