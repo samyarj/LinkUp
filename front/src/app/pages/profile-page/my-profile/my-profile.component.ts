@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppUser, Pronouns } from '../../../interfaces/user.interface';
+import { ProfileService } from '../../../services/profile-service/profile.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -23,7 +24,11 @@ export class MyProfileComponent implements OnInit {
     pronouns: Pronouns.HE_HIM,
   };
 
-  constructor(private fb: FormBuilder) {}
+  user!: AppUser;
+  constructor(
+    private fb: FormBuilder,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -53,8 +58,45 @@ export class MyProfileComponent implements OnInit {
         ...this.editProfileForm.value,
       };
 
-      console.log('Updated User:', updatedUser);
-      // Call your backend service to save the changes
+      this.saveUser();
     }
+  }
+
+  saveUser() {
+    this.profileService.getIfUserExist(this.user.id).subscribe({
+      next: (existingUser) => {
+        if (existingUser) {
+          this.profileService.updateUser(this.user).subscribe({
+            next: (updatedUser) => {
+              console.log('User updated:', updatedUser);
+            },
+            error: (error) => {
+              console.error('Error updating user:', error);
+            },
+          });
+        } else {
+          this.profileService.createUser(this.user).subscribe({
+            next: (createdUser) => {
+              console.log('User created:', createdUser);
+            },
+            error: (error) => {
+              console.error('Error creating user:', error);
+            },
+          });
+        }
+      },
+      error: (error) => {
+        console.error('Error checking if user exists:', error);
+        // Assuming that if there's an error, the user does not exist
+        this.profileService.createUser(this.user).subscribe({
+          next: (createdUser) => {
+            console.log('User created:', createdUser);
+          },
+          error: (error) => {
+            console.error('Error creating user:', error);
+          },
+        });
+      },
+    });
   }
 }
