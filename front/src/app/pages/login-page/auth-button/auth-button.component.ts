@@ -10,7 +10,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class AuthButtonComponent implements OnInit, OnDestroy{
   private unsubscribe$ = new Subject<void>();
-
+  public isUserLogged: boolean = false;
   constructor(
     @Inject(DOCUMENT) public document: Document,
     public auth: AuthService,
@@ -33,6 +33,12 @@ export class AuthButtonComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  public isLogged(): void {
+    this.auth.isAuthenticated$.subscribe((isLogged) => {
+      this.isUserLogged =  isLogged;
+    });
   }
 
 }

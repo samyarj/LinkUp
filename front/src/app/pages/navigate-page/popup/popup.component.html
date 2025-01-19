@@ -1,0 +1,33 @@
+<div class="popup-container">
+    <div class="popup-header">
+      <h3>{{ element.title }}</h3>
+      <span *ngIf="isEvent()" class="event-badge">Event</span>
+      <span *ngIf="!isEvent()" class="note-badge">Note</span>
+    </div>
+  
+    <p class="popup-description">{{ element.description }}</p>
+  
+    <div class="popup-details">
+      <div *ngIf="isEvent()">
+        <strong>Event Timing:</strong>
+        <p>{{ getEventTiming() }}</p>
+      </div>
+      <div>
+        <strong>Date:</strong>
+        <p>{{ element.date | date: 'mediumDate' }}</p>
+      </div>
+      <div>
+        <strong>Expiration:</strong>
+        <p>{{ element.expirationDate | date: 'mediumDate' }}</p>
+      </div>
+      <div *ngIf="element.location">
+        <strong>Location:</strong>
+        <p>Lat: {{ element.location.location[1] }}, Lng: {{ element.location.location[0] }}</p>
+      </div>
+      <div *ngIf="!element.location">
+        <p>No location information available.</p>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" class="green" (click)="openInfo()">See more</button>
+  </div>
+  

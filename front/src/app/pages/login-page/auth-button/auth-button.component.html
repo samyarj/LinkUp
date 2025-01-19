@@ -1,7 +1,7 @@
 <div class="header">
   <h1>LinkUp</h1>
 </div>
-@if(auth.isAuthenticated$) {
+@if(isUserLogged) {
 <button
   (click)="
     auth.logout({ logoutParams: { returnTo: document.location.origin } })

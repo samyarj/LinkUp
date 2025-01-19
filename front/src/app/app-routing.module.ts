@@ -6,11 +6,13 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { NavigatePageComponent } from './pages/navigate-page/navigate-page.component';
 import { CreateEventPageComponent } from './pages/create-event-page/create-event-page.component';
 import { authGuard } from './auth/auth.guard';
+import { PostInfoComponent } from './pages/post-info/post-info.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'navigate', component: NavigatePageComponent },
+  { path: 'info/:id', component: PostInfoComponent },
   { path: 'my-profile', component: ProfilePageComponent },
   { path: 'new-event', component: CreateEventPageComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

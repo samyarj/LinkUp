@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
-import { Note } from '../../interfaces/note.interface';
+import { Event, Note } from '../../interfaces/note.interface';
 import { Message } from '../../interfaces/message.interface';
 
 @Injectable({
@@ -17,16 +17,9 @@ export class PostService {
     return this.http.get<Note[]>(this.baseUrl);
   }
 
-  public getMyFriendsNotes(userId: string): Observable<Note[]> {
-    return this.http.get<Note[]>(`${this.baseUrl}/friends/${userId}`);
-  }
 
-  public getMyFriendsEvents(userId: string): Observable<Note[]> {
-    return this.http.get<Note[]>(`${this.baseUrl}/events/friends/${userId}`);
-  }
-
-  public getAllEvents(): Observable<Note[]> {
-    return this.http.get<Note[]>(this.baseUrl);
+  public getAllEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(this.baseUrl);
   }
 
   public addCommentToNoteById(noteId: string, comment: Message): Observable<Note> {

@@ -25,6 +25,9 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { CreateEventPageComponent } from './pages/create-event-page/create-event-page.component';
 import { Router } from '@angular/router';
 import { FirstLoginComponent } from './pages/profile-page/first-login/first-login.component';
+import { MapSidebarComponent } from './pages/navigate-page/map-sidebar/map-sidebar.component';
+import { PopupComponent } from './pages/navigate-page/popup/popup.component';
+import { PostInfoComponent } from './pages/post-info/post-info.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { FirstLoginComponent } from './pages/profile-page/first-login/first-logi
     NavigatePageComponent,
     CreateEventPageComponent,
     FirstLoginComponent,
+    MapSidebarComponent,
+    PopupComponent,
+    PostInfoComponent,
   ],
   imports: [
     CommonModule,
