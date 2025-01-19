@@ -1,1 +1,36 @@
-<p>map-sidebar works!</p>
+<button class="return-button" (click)="returnToHome()">Return to Home</button>
+
+<div class="sidebar-content">
+
+    <h2 class="sidebar-title">Notes and Events of the moment</h2>
+    
+    <h3>Events</h3>
+    <div *ngFor="let event of events" class="item-card">
+      <div class="item-header" (click)="toggleExpand(event)">
+        <h4>{{ event.title }}</h4>
+        <p>{{ event.date | date: 'short' }}</p>
+      </div>
+      <div class="item-details" *ngIf="isExpanded(event)">
+        <p><strong>Description:</strong> {{ event.description }}</p>
+        <p><strong>Starting Hour:</strong> {{ event.startingHour }}</p>
+        <p><strong>Ending Hour:</strong> {{ event.endingHour }}</p>
+        <p><strong>Location:</strong> {{ event.location.location[1] }}, {{ event.location.location[0] }}</p>
+        <button (click)="selectItem(event)">View Details</button>
+      </div>
+    </div>
+  
+    <h3>Notes</h3>
+    <div *ngFor="let note of notes" class="item-card">
+      <div class="item-header" (click)="toggleExpand(note)">
+        <h4>{{ note.title }}</h4>
+        <p>{{ note.date | date: 'short' }}</p>
+      </div>
+      <div class="item-details" *ngIf="isExpanded(note)">
+        <p><strong>Description:</strong> {{ note.description }}</p>
+        <p><strong>Expiration Date:</strong> {{ note.expirationDate | date: 'short' }}</p>
+        <p><strong>Location:</strong> {{ note.location.location[1] }}, {{ note.location.location[0] }}</p>
+        <button (click)="selectItem(note)">View Details</button>
+      </div>
+    </div>
+  </div>
+  
